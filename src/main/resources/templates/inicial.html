@@ -1,0 +1,9 @@
+<html>
+<body>
+    <h3> Lista de Clientes:</h3>
+
+        <ul>
+            <li th:each="cus : ${customers}" th:text="${cus}"></li>
+        </ul>
+</body>
+</html>
