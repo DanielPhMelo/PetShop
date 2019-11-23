@@ -1,9 +1,13 @@
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <body>
-    <h3> Lista de Clientes:</h3>
+    <h3>Lista de Clientes: </h3>
+    <label th:text="${mensagem}" />
 
-        <ul>
-            <li th:each="cus : ${customers}" th:text="${cus}"></li>
-        </ul>
+    <ul>
+        <li th:each="cli : ${clientes}" th:text="${cli.nome}"></li>
+    </ul>
+
+    <a th:href="@{/admin/clientes/criar}">Criar novo</a>
+
 </body>
 </html>
