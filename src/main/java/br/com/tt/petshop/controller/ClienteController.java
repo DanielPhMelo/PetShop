@@ -24,7 +24,7 @@ public class ClienteController {
         model.addAttribute("mensagem",
                 "Bem vindo a lista de clientes da petshop");
         model.addAttribute("clientes", clienteService.listar());
-        return "inicial";
+        return "clientes";
     }
 
     @RequestMapping(method = RequestMethod.GET,

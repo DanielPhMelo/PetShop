@@ -1,0 +1,42 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <h3>Lista de Unidades: </h3>
+    <label th:text="${mensagem}" />
+
+    <form th:method="get" th:action="@{/admin/unidades/filtraPorNome}">
+        <label>Filtrar por Nome: </label>
+        <input name="nome">
+        <input type="submit" value="Filtrar">
+    </form>
+
+    <table>
+        <thead>
+        <tr>
+            <th> Nome </th>
+            <th> Endereco </th>
+            <th> Telefone </th>
+            <th> CNPJ </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${unidades.empty}">
+            <td colspan="4"> Não existem unidades cadastradas </td>
+        </tr>
+        <tr th:each="uni : ${unidades}">
+            <td><span th:text="${uni.nome}"> Nome </span></td>
+            <td><span th:text="${uni.endereco}"> Endereco </span></td>
+            <td><span th:text="${uni.telefone}"> Telefone </span></td>
+            <td><span th:text="${uni.cnpj}"> CNPJ </span></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li th:each="uni : ${unidades}" th:text="${uni.nome}"></li>
+    </ul>
+
+
+    <br><a th:href="@{/admin/unidades/criar}">Criar nova</a>
+
+</body>
+</html>

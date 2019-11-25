@@ -17,12 +17,19 @@ public class UnidadeController {
     }
 
     @RequestMapping(method = RequestMethod.GET,
+            value = "/admin/unidades/filtraPorNome")
+    public String filtrarPorNome(String nome, Model model){
+        model.addAttribute("unidades", unidadeService.listarPorNome(nome));
+        return "unidades";
+    }
+
+    @RequestMapping(method = RequestMethod.GET,
             value = "/admin/unidades")
     public String listar(Model model){
         model.addAttribute("mensagem",
                 "Bem vindo a lista de unidades da petshop");
         model.addAttribute("unidades", unidadeService.listar());
-        return "unidade";
+        return "unidades";
     }
 
     @RequestMapping(method = RequestMethod.GET,
@@ -33,7 +40,7 @@ public class UnidadeController {
     }
 
     @RequestMapping(method = RequestMethod.POST,
-            value = "/admin/unidades/criarNovo")
+            value = "/admin/unidades/criarNova")
     public String criarNovo(Unidade unidade, Model model) {
             unidadeService.salvar(unidade);
             model.addAttribute("mensagem",
@@ -42,6 +49,6 @@ public class UnidadeController {
         model.addAttribute("unidades",
                 unidadeService.listar());
 
-        return "unidade";
+        return "unidades";
     }
 }

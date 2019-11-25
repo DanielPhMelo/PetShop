@@ -3,7 +3,7 @@ package br.com.tt.petshop.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="TB_CLIENTE")
+@Table(name="TB_UNIDADE")
 public class Unidade {
     @Id
     @Column(name = "ID_UNIDADE")
