@@ -20,7 +20,7 @@ public class UnidadeController {
             value = "/admin/unidades/filtraPorNome")
     public String filtrarPorNome(String nome, Model model){
         model.addAttribute("unidades", unidadeService.listarPorNome(nome));
-        return "unidades";
+        return "unidade/unidades";
     }
 
     @RequestMapping(method = RequestMethod.GET,
@@ -29,26 +29,22 @@ public class UnidadeController {
         model.addAttribute("mensagem",
                 "Bem vindo a lista de unidades da petshop");
         model.addAttribute("unidades", unidadeService.listar());
-        return "unidades";
+        return "unidade/unidades";
     }
 
     @RequestMapping(method = RequestMethod.GET,
             value = "/admin/unidades/criar")
     public String unidadeCriar(Model model){
         model.addAttribute("novaUnidade", new Unidade());
-        return "unidade_criar";
+        return "unidade/unidade_criar";
     }
 
     @RequestMapping(method = RequestMethod.POST,
             value = "/admin/unidades/criarNova")
     public String criarNovo(Unidade unidade, Model model) {
-            unidadeService.salvar(unidade);
-            model.addAttribute("mensagem",
-                    "Unidade salva com sucesso!");
-
-        model.addAttribute("unidades",
-                unidadeService.listar());
-
-        return "unidades";
+        unidadeService.salvar(unidade);
+        model.addAttribute("mensagem","Unidade salva com sucesso!");
+        model.addAttribute("unidades", unidadeService.listar());
+        return "unidade/unidades";
     }
 }

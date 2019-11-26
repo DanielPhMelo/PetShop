@@ -6,6 +6,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UnidadeService {
@@ -15,12 +16,16 @@ public class UnidadeService {
         this.unidadeRepository = unidadeRepository;
     }
 
-    public void salvar(Unidade unidade){
-        unidadeRepository.save(unidade);
+    public Unidade salvar(Unidade unidade){
+        return unidadeRepository.save(unidade);
     }
 
     public List<Unidade> listar(){
         return unidadeRepository.findAll();
+    }
+
+    public Unidade listarPorId(Long id){
+        return null;
     }
 
     public List<Unidade> listarPorNome(String nome){
