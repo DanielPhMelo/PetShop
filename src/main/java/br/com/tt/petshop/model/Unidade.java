@@ -1,6 +1,7 @@
 package br.com.tt.petshop.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="TB_UNIDADE")
@@ -22,8 +23,19 @@ public class Unidade {
     @Column
     private String cnpj;
 
+    @OneToMany(mappedBy = "unidade")
+    private List<Cliente> clientes;
+
     public Long getId() {
         return id;
+    }
+
+    public List<Cliente> getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(List<Cliente> clientes) {
+        this.clientes = clientes;
     }
 
     public void setId(Long id) {

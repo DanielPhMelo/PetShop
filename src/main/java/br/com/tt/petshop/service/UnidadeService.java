@@ -1,5 +1,6 @@
 package br.com.tt.petshop.service;
 
+import br.com.tt.petshop.exceptions.RegistroNaoExisteException;
 import br.com.tt.petshop.model.Unidade;
 import br.com.tt.petshop.repository.UnidadeRepository;
 import org.springframework.data.domain.Example;
@@ -24,8 +25,14 @@ public class UnidadeService {
         return unidadeRepository.findAll();
     }
 
-    public Unidade listarPorId(Long id){
-        return null;
+    public Unidade buscarPorId(Long id){
+        return unidadeRepository.findById(id)
+                .orElseThrow(()->
+                        new RegistroNaoExisteException("Usuário não Existe"));
+    }
+
+    public void apagarPorId(Long id){
+        unidadeRepository.deleteById(id);
     }
 
     public List<Unidade> listarPorNome(String nome){

@@ -1,5 +1,7 @@
 package br.com.tt.petshop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -29,6 +31,19 @@ public class Cliente {
 
     @Column
     private String email;
+
+    @JsonIgnore
+    @ManyToOne()
+    @JoinColumn(name = "ID_UNIDADE")
+    private Unidade unidade;
+
+    public Unidade getUnidade() {
+        return unidade;
+    }
+
+    public void setUnidade(Unidade unidade) {
+        this.unidade = unidade;
+    }
 
     public String getTelefone() {
         return telefone;

@@ -25,8 +25,9 @@ public class UnidadeEndpoint {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Unidade> buscar(Long id){
-        return null;
+    public ResponseEntity<Unidade> buscar(@PathVariable Long id){
+        Unidade unidade = unidadeService.buscarPorId(id);
+        return ResponseEntity.ok(unidade);
     }
 
     @PostMapping
@@ -35,6 +36,15 @@ public class UnidadeEndpoint {
         Long idCriado = unidadeSalva.getId();
         return ResponseEntity.created(URI.create(String.format("unidades/")+idCriado.toString())).build();
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity apagar(@PathVariable Long id){
+        unidadeService.apagarPorId(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
+
 }
 
 
