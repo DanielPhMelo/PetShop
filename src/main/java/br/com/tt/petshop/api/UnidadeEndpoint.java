@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,7 +45,7 @@ public class UnidadeEndpoint {
     }
 
     @PostMapping
-    public ResponseEntity salvar(@RequestBody UnidadeInDTO unidadeInDTO){
+    public ResponseEntity salvar(@Valid @RequestBody UnidadeInDTO unidadeInDTO){
         Unidade unidade = mapper.map(unidadeInDTO, Unidade.class);
         Unidade unidadeSalva = unidadeService.salvar(unidade);
         Long idCriado = unidadeSalva.getId();

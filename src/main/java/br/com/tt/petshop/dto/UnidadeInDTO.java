@@ -1,9 +1,17 @@
 package br.com.tt.petshop.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
 public class UnidadeInDTO {
+    @NotBlank(message = "Informe o nome")
     private String nome;
+    @NotBlank
     private String endereco;
+    @NotBlank
+    //@Patern
     private String telefone;
+    @NotBlank
     private String cnpj;
 
     public String getNome() {
