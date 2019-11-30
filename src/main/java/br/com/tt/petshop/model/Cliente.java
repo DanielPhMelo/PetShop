@@ -32,7 +32,6 @@ public class Cliente {
     @Column
     private String email;
 
-    @JsonIgnore
     @ManyToOne()
     @JoinColumn(name = "ID_UNIDADE")
     private Unidade unidade;
