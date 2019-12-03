@@ -1,6 +1,7 @@
 package br.com.tt.petshop.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -12,9 +13,11 @@ public class Unidade {
     private Long id;
 
     @Column
+    @NotBlank
     private String nome;
 
     @Column
+
     private String endereco;
 
     @Column

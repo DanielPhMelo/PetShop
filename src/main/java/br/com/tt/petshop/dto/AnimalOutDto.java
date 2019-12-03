@@ -1,48 +1,36 @@
-package br.com.tt.petshop.model;
+package br.com.tt.petshop.dto;
 
-import javax.persistence.*;
+import br.com.tt.petshop.model.Cliente;
+import br.com.tt.petshop.model.Unidade;
+
 import java.time.LocalDate;
 
+public class AnimalOutDto {
 
-@Entity
-@Table(name = "TB_ANIMAL")
-public class Animal {
-
-
-    @Id
-    @Column(name = "ID_ANIMAL")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column
     private String nome;
-
-    @Column
     private LocalDate dataNascimento;
+    private String unidade;
+    private String cliente;
 
-    @ManyToOne
-    @JoinColumn(name = "ID_UNIDADE")
-    private Unidade unidade;
-
-    public Unidade getUnidade() {
+    public String getUnidade() {
         return unidade;
     }
 
-    public void setUnidade(Unidade unidade) {
+    public void setUnidade(String unidade) {
         this.unidade = unidade;
     }
 
-    public Cliente getCliente() {
+    public String getCliente() {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
+    public void setCliente(String cliente) {
         this.cliente = cliente;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "ID_CLIENTE")
-    private Cliente cliente;
+    public AnimalOutDto() {
+    }
 
     public Long getId() {
         return id;

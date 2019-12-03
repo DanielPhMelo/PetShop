@@ -1,13 +1,18 @@
 package br.com.tt.petshop.service;
 
 import br.com.tt.petshop.exceptions.NegocioException;
+import br.com.tt.petshop.exceptions.RegistroNaoExisteException;
 import br.com.tt.petshop.model.Cliente;
 import br.com.tt.petshop.repository.ClienteRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@Validated
 public class ClienteService  {
     private static final int QUANTIDADE_MINIMA_PARTES_NOME = 2;
     private static final int TAMANHO_CPF = 11;
@@ -21,6 +26,13 @@ public class ClienteService  {
 
     public List<Cliente> listar(){
         return clienteRepository.findAll();
+    }
+
+    public Cliente buscarPorId(
+            @NotNull (message = "Id do cliente é obrigatório!")
+                    Long id){
+        Optional<Cliente>  optionalCliente = clienteRepository.findById(id);
+        return optionalCliente.orElseThrow(() -> new RegistroNaoExisteException("Id do cliente informado não existe"));
     }
 
     public void salvar(Cliente cliente) throws NegocioException {

@@ -5,11 +5,14 @@ import br.com.tt.petshop.model.Unidade;
 import br.com.tt.petshop.repository.UnidadeRepository;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Validated
 public class UnidadeService {
     private final UnidadeRepository unidadeRepository;
 
@@ -25,10 +28,12 @@ public class UnidadeService {
         return unidadeRepository.findAll();
     }
 
-    public Unidade buscarPorId(Long id){
+    public Unidade buscarPorId(
+            @NotNull (message = "Id da unidade é obrigatório!")
+                    Long id){
         return unidadeRepository.findById(id)
                 .orElseThrow(()->
-                        new RegistroNaoExisteException("Usuário não Existe"));
+                        new RegistroNaoExisteException("Id do usuário não Existe"));
     }
 
     public void apagarPorId(Long id){
