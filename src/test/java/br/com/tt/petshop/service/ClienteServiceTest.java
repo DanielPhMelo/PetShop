@@ -2,6 +2,7 @@ package br.com.tt.petshop.service;
 
 import br.com.tt.petshop.exceptions.NegocioException;
 import br.com.tt.petshop.model.Cliente;
+import br.com.tt.petshop.repository.ClienteRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.Test;
 class ClienteServiceTest {
 
     private ClienteService clienteService;
+    private ClienteRepository clienteRepository;
     private static final String CPF_VALIDO = "123.456.789-11";
     private static final String NOME_VALIDO = "Daniel Melo";
 

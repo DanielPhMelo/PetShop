@@ -4,6 +4,7 @@ import br.com.tt.petshop.exceptions.NegocioException;
 import br.com.tt.petshop.exceptions.RegistroNaoExisteException;
 import br.com.tt.petshop.model.Cliente;
 import br.com.tt.petshop.repository.ClienteRepository;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -24,7 +25,16 @@ public class ClienteService  {
         this.clienteRepository = clienteRepository;
     }
 
-    public List<Cliente> listar(){
+    public List<Cliente> listar(Optional<String> nome, Optional<String> cpf) {
+        if (nome.isPresent() && cpf.isPresent()) {
+            return clienteRepository.listarPorCpfOuNome(nome.get(), cpf.get());
+
+        } else if (nome.isPresent()) {
+            return clienteRepository.listarPorNome(nome.get());
+
+        } else if (cpf.isPresent()) {
+            return clienteRepository.listarPorCpf(cpf.get());
+        }
         return clienteRepository.findAll();
     }
 

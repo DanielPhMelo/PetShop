@@ -23,7 +23,7 @@ public class ClienteController {
     public String listar(Model model){
         model.addAttribute("mensagem",
                 "Bem vindo a lista de clientes da petshop");
-        model.addAttribute("clientes", clienteService.listar());
+        model.addAttribute("clientes", clienteService.listar(null, null));
         return "cliente/clientes";
     }
 
@@ -47,7 +47,7 @@ public class ClienteController {
                     "Erro: ".concat(e.getMessage()));
         }
         model.addAttribute("clientes",
-                clienteService.listar());
+                clienteService.listar(null, null));
 
         return "cliente/clientes";
     }

@@ -20,6 +20,7 @@ public class ModelMapperConfig {
                 .addMapping(
                         (animal)->animal.getCliente().getNome(),
                         AnimalOutDto::setCliente);
+
         return modelMapper;
     }
 
