@@ -1,5 +1,6 @@
 package br.com.tt.petshop.repository;
 
+import br.com.tt.petshop.model.Animal;
 import br.com.tt.petshop.model.Cliente;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -11,27 +12,27 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 @ExtendWith(SpringExtension.class)
 @Sql(value="classpath:sql/insert_test_data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value="classpath:sql/delete_all_test_data.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-class ClienteRepositoryIntegrationTest {
+public class AnimalRepositoryIntegrationTest {
 
     @Autowired
-    private ClienteRepository clienteRepository;
+    private AnimalRepository animalRepository;
 
     @Test
     public void deveriaListarPorNome(){
         //arrange
-        List<Cliente> clientes;
-        Cliente cliente;
+        List<Animal> animais;
+        Animal animal;
 
         //act
-        clientes = clienteRepository.listarPorNome("Seu Adolfo Brabo");
+        animais = animalRepository.listarPorNome("Seu Adolfo Brabo");
 
         //assert
-        cliente = clientes.get(0);
-        Assertions.assertEquals("Seu Adolfo Brabo", cliente.getNome());
+        animal = animais.get(0);
+        Assertions.assertEquals("Seu Adolfo Brabo", animal.getNome());
     }
+
 }

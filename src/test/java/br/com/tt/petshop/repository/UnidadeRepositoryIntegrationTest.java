@@ -1,6 +1,7 @@
 package br.com.tt.petshop.repository;
 
-import br.com.tt.petshop.model.Cliente;
+import br.com.tt.petshop.model.Animal;
+import br.com.tt.petshop.model.Unidade;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,26 +13,40 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @DataJpaTest
 @ExtendWith(SpringExtension.class)
 @Sql(value="classpath:sql/insert_test_data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value="classpath:sql/delete_all_test_data.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-class ClienteRepositoryIntegrationTest {
-
+class UnidadeRepositoryIntegrationTest {
     @Autowired
-    private ClienteRepository clienteRepository;
+    private UnidadeRepository unidadeRepository;
 
     @Test
     public void deveriaListarPorNome(){
         //arrange
-        List<Cliente> clientes;
-        Cliente cliente;
+        List<Unidade> unidades;
+        Unidade unidade;
 
         //act
-        clientes = clienteRepository.listarPorNome("Seu Adolfo Brabo");
+        unidades = unidadeRepository.listarPorNome("Pet Shop do Sven");
 
         //assert
-        cliente = clientes.get(0);
-        Assertions.assertEquals("Seu Adolfo Brabo", cliente.getNome());
+        Assertions.assertEquals(1, unidades.size());
+        unidade = unidades.get(0);
+        Assertions.assertEquals("Pet Shop do Sven", unidade.getNome());
+    }
+
+    @Test
+    public void deveriaFalharBuscaPorNome(){
+        //Arrange
+        List<Unidade> unidades;
+        Unidade unidade;
+
+        //Act
+        unidades = unidadeRepository.listarPorNome("Nome Inexistente");
+
+        //Assert
+        Assertions.assertEquals(0, unidades.size());
     }
 }
