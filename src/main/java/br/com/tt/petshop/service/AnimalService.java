@@ -4,6 +4,7 @@ import br.com.tt.petshop.dto.AnimalInDto;
 import br.com.tt.petshop.model.Animal;
 import br.com.tt.petshop.model.Cliente;
 import br.com.tt.petshop.model.Unidade;
+import br.com.tt.petshop.model.projection.AnimalProjection;
 import br.com.tt.petshop.repository.AnimalRepository;
 import org.modelmapper.ModelMapper;
 import org.omg.PortableServer.POAPackage.AdapterAlreadyExistsHelper;
@@ -62,5 +63,9 @@ public class AnimalService {
 
     private Unidade obterUnidadeAnimal(Long unidade) {
         return unidadeService.buscarPorId(unidade);
+    }
+
+    public List<AnimalProjection> listarParaRelatorio (){
+        return animalRepository.findAllOrderByNome();
     }
 }

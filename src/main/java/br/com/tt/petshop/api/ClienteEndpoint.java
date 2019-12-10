@@ -1,6 +1,5 @@
 package br.com.tt.petshop.api;
 
-import br.com.tt.petshop.dto.AnimalOutDto;
 import br.com.tt.petshop.dto.ClienteOutDto;
 import br.com.tt.petshop.model.Cliente;
 import br.com.tt.petshop.service.ClienteService;
