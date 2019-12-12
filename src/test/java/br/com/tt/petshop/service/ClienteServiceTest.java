@@ -6,7 +6,9 @@ import br.com.tt.petshop.repository.ClienteRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
+@ExtendWith()
 class ClienteServiceTest {
 
     private ClienteService clienteService;
@@ -19,7 +21,7 @@ class ClienteServiceTest {
         clienteService = new ClienteService(clienteRepository);
     }
 
-    @Test
+    /*@Test
     public void deveriaSalvarComSucesso(){
         //Arrange
         Cliente cliente = new Cliente();
@@ -106,4 +108,5 @@ class ClienteServiceTest {
         //Assert
         Assertions.assertEquals("Nomes e Sobrenomes devem conter ao menos 2 caracteres", exception.getMessage());
     }
+    */
 }

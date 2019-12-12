@@ -21,6 +21,13 @@ public class Cliente {
     @Column
     private String telefone;
 
+    @Column
+    private String email;
+
+    @ManyToOne()
+    @JoinColumn(name = "ID_UNIDADE")
+    private Unidade unidade;
+
     public Long getId() {
         return id;
     }
@@ -28,13 +35,6 @@ public class Cliente {
     public void setId(Long id) {
         this.id = id;
     }
-
-    @Column
-    private String email;
-
-    @ManyToOne()
-    @JoinColumn(name = "ID_UNIDADE")
-    private Unidade unidade;
 
     public Unidade getUnidade() {
         return unidade;

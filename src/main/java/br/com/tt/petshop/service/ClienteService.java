@@ -1,10 +1,12 @@
 package br.com.tt.petshop.service;
 
+import br.com.tt.petshop.client.SituacaoCredito;
+import br.com.tt.petshop.client.SituacaoCreditoClient;
+import br.com.tt.petshop.client.SituacaoCreditoDto;
 import br.com.tt.petshop.exceptions.NegocioException;
 import br.com.tt.petshop.exceptions.RegistroNaoExisteException;
 import br.com.tt.petshop.model.Cliente;
 import br.com.tt.petshop.repository.ClienteRepository;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -20,9 +22,11 @@ public class ClienteService  {
     private static final int TAMANHO_PARTE_NOME = 2;
 
     private final ClienteRepository clienteRepository;
+    private final SituacaoCreditoClient situacaoCreditoClient;
 
-    public ClienteService(ClienteRepository clienteRepository) {
+    public ClienteService(ClienteRepository clienteRepository, SituacaoCreditoClient situacaoCreditoClient) {
         this.clienteRepository = clienteRepository;
+        this.situacaoCreditoClient = situacaoCreditoClient;
     }
 
     public List<Cliente> listar(Optional<String> nome, Optional<String> cpf) {
@@ -45,11 +49,12 @@ public class ClienteService  {
         return optionalCliente.orElseThrow(() -> new RegistroNaoExisteException("Id do cliente informado não existe"));
     }
 
-    public void salvar(Cliente cliente) throws NegocioException {
+    public Cliente salvar(Cliente cliente) throws NegocioException {
         validaQuantidadePartesNome(cliente.getNome());
         validaTamanhoCpf(cliente.getCpf());
         validaTamanhoDasPartesDoNome(cliente.getNome());
-        clienteRepository.save(cliente);
+        validaPendenciaCredito(cliente.getCpf());
+        return clienteRepository.save(cliente);
     }
 
     private void validaTamanhoDasPartesDoNome(String nome) throws NegocioException {
@@ -75,4 +80,10 @@ public class ClienteService  {
         }
     }
 
+    private void validaPendenciaCredito(String cpf) throws NegocioException{
+        SituacaoCreditoDto situacaoCreditoDto = situacaoCreditoClient.consultaSituacao(cpf);
+        if (situacaoCreditoDto.getSituacaoCredito().equals(SituacaoCredito.NEGATIVADO)){
+            throw new NegocioException(String.format("O Cliente não pode ser cadastrado. Verifique a situação."));
+        }
+    }
 }
